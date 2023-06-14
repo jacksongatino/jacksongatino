@@ -1,0 +1,39 @@
+- 👋 Hi, I’m @jacksongatino
+- 👀 I’m interested in ...
+- 🌱 I’m currently learning ...
+- 💞️ I’m looking to collaborate on ...
+- 📫 How to reach me ...
+
+<!---
+jacksongatino/jacksongatino is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+You can click the Preview link to take a look at your changes.
+--->
+<?php
+$inputFilePath = 'input.txt'; // Path to the input file
+$outputFilePath = 'output.jpg'; // Path to save the downloaded file
+
+// Read the input file
+$inputFile = fopen($inputFilePath, 'r');
+if ($inputFile) {
+    // Read the remote file URL from the input file
+    $remoteFileUrl = trim(fgets($inputFile));
+    fclose($inputFile);
+
+    // Download the remote file and save it locally
+    $fileData = file_get_contents($remoteFileUrl);
+    if ($fileData) {
+        $outputFile = fopen($outputFilePath, 'w');
+        if ($outputFile) {
+            fwrite($outputFile, $fileData);
+            fclose($outputFile);
+            echo 'File downloaded and saved successfully.';
+        } else {
+            echo 'Failed to open the output file for writing.';
+        }
+    } else {
+        echo 'Failed to download the remote file.';
+    }
+} else {
+    echo 'Failed to open the input file.';
+}
+?>
